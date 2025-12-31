@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year 2026 Pihu 🎉</title>
+
+<style>
+*{box-sizing:border-box;}
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+    background:black;
+    color:white;
+}
+.page{
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+}
+
+/* 🔒 TIMER PAGE */
+#timerPage{
+    display:flex;
+    background:radial-gradient(circle,#1a0033,#000);
+}
+#timer{
+    font-size:clamp(2.5em,8vw,4em);
+    letter-spacing:3px;
+}
+
+/* 🎉 PAGE 1 */
+#page1{
+    background:radial-gradient(circle at top,#ff0080,#3a0066);
+}
+
+/* 🎁 PAGE 2 */
+#page2{
+    background:linear-gradient(to bottom,#ff512f,#dd2476);
+}
+
+/* Buttons */
+button{
+    padding:14px 26px;
+    border:none;
+    border-radius:30px;
+    background:gold;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+/* Floating Hearts */
+.heart{
+    position:fixed;
+    font-size:18px;
+    animation:floatUp 6s linear infinite;
+}
+@keyframes floatUp{
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-10vh);opacity:0;}
+}
+
+/* Candle */
+.candle{
+    width:40px;
+    height:80px;
+    background:#fff;
+    border-radius:10px;
+    position:relative;
+    margin-top:30px;
+}
+.flame{
+    width:18px;
+    height:30px;
+    background:orange;
+    border-radius:50%;
+    position:absolute;
+    top:-28px;
+    left:11px;
+    animation:flicker .4s infinite;
+}
+@keyframes flicker{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+/* Fireworks Canvas */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    pointer-events:none;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<!-- 🔒 TIMER PAGE -->
+<div id="timerPage" class="page">
+    <h1>⏳ Countdown to 2026 ⏳</h1>
+    <div id="timer">Loading...</div>
+</div>
+
+<!-- 🎉 PAGE 1 -->
+<div id="page1" class="page">
+    <h1>🎆 Happy New Year 2026 🎆</h1>
+    <h2> PIHU 💖</h2>
+    <p>Make a wish and blow the candle ✨</p>
+
+    <div class="candle" onclick="blowCandle()">
+        <div class="flame" id="flame"></div>
+    </div>
+</div>
+
+<!-- 🎁 PAGE 2 -->
+<div id="page2" class="page">
+    <h1>🎁 A Little Surprise for You, Vebe chilam toke midnight a dibo and etar sathe aro kichu jinish thakbe. To anyways ekhaney diye dilam. 🎁</h1>
+    <p> Happy New Year 2026, My Dearest Pihu!,
+        This year, I wish you a world as bright and beautiful as your smile. Your cuteness lights up every moment, and your cooking skills always make life taste a little sweeter. I’m amazed by the beautiful sketch you recently drew — your creativity is magical!
+
+May 2026 fill you with energy and focus for your studies, and may all your hard work pay off brilliantly. I’m cheering for you as you prepare for your NEET 2026, and I believe in your strength, intelligence, and determination.
+
+I also wish you good health, endless happiness, and the courage to chase every dream. May every day bring little joys, and may you continue to shine in everything you do.
+
+You are truly amazing, Pihu, and this year is going to be your year! 🌟💖
+
+With all my love, Your Secret Admirer. I am always here for you, with you, and cheering you on!
+
+I hope this little surprise brings a big smile to your face. Happy New Year once again! My Dear!
+         ✨</p>
+    <img src="Sketch of Pihu.jpeg" style="max-width:280px;border-radius:20px;">
+</div>
+
+<audio id="music" src="Wishing Song.mp3" loop></audio>
+
+<script>
+/* ⏳ COUNTDOWN */
+const target=new Date("January 1, 2026 00:00:00").getTime();
+const timer=document.getElementById("timer");
+setInterval(()=>{
+    const now=new Date().getTime();
+    const d=target-now;
+    if(d<=0){
+        document.getElementById("timerPage").style.display="none";
+        document.getElementById("page1").style.display="flex";
+        return;
+    }
+    const h=Math.floor((d/(1000*60*60))%24);
+    const m=Math.floor((d/(1000*60))%60);
+    const s=Math.floor((d/1000)%60);
+    timer.innerHTML=`${h}h ${m}m ${s}s`;
+},1000);
+
+/* 🕯️ Candle Blow */
+function blowCandle(){
+    document.getElementById("flame").style.display="none";
+    document.getElementById("music").play();
+    setTimeout(()=>{
+        document.getElementById("page1").style.display="none";
+        document.getElementById("page2").style.display="flex";
+    },1000);
+}
+
+/* 💖 Floating Hearts */
+setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},500);
+
+/* 🎆 Fireworks */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+function firework(){
+    const x=Math.random()*canvas.width;
+    const y=Math.random()*canvas.height/2;
+    for(let i=0;i<50;i++){
+        ctx.beginPath();
+        ctx.arc(x,y,Math.random()*3,0,Math.PI*2);
+        ctx.fillStyle=`hsl(${Math.random()*360},100%,50%)`;
+        ctx.fill();
+    }
+}
+setInterval(()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    firework();
+},700);
+</script>
+
+</body>
+</html>
